@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+const baseUrl = '/api';
+
 const Exercise = (props) => {
 	return (
 		 <tr>
@@ -24,18 +26,20 @@ export default class ExercisesList extends Component {
 	}
 	
 	componentDidMount() {
-		axios.get('http://localhost:5000/exercises/').then(res => {
+		console.log(`${baseUrl}/exercises/`);
+		axios.get(`${baseUrl}/exercises/`).then(res => {
+			console.log("aaa", res.data, typeof(res.data));
 			this.setState({ exercises: res.data })
 		}).catch(error => {
-			console.log(error);
+			console.log(`Error in mounting: ${error}`);
 		})
 	}
 	
 	deleteExercise(id) {
-		axios.delete('http://localhost:5000/exercises/' + id).then(res => {
-			console.log(res.data);
+		axios.delete(`${baseUrl}/exercises/${id}/`).then(res => {
+			// console.log(res.data);
 			
-			axios.get('http://localhost:5000/exercises/').then(res => {
+			axios.get(`${baseUrl}/exercises/`).then(res => {
 				this.setState({ exercises: res.data })
 			}).catch(error => {
 				console.log(error);
@@ -46,6 +50,7 @@ export default class ExercisesList extends Component {
 	}
 	
 	exerciseList() {
+		console.log("xxxx", this.state.exercises, typeof(this.state.exercises));
 		return this.state.exercises.map(curretExercise => {
 			return <Exercise exercise={curretExercise} deleteExercise={this.deleteExercise} key={curretExercise._id} />
 		})

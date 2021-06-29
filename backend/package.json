@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -11,9 +11,7 @@
 		"deploy": "git push heroku master",
 		"deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
 		"logs:prod": "heroku logs --tail",
-		"lint": "eslint .",
-		"deploy:full:exp": "npm run build:ui && git add . && git commit -m uibuild && if [ $? -eq 1 ] ; then echo \"error: nothing to commit\" ; else npm run deploy ; fi",
-		"github:push": "git push origin master"
+		"github:push": "git push origin main"
   },
   "keywords": [],
   "author": "",

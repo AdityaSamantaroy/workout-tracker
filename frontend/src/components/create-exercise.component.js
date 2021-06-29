@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
 import axios from 'axios';
 
+const baseUrl = '/api';
+
 export default class CreateExercises extends Component{
 	constructor(props) {
 		super(props);
@@ -28,7 +30,7 @@ export default class CreateExercises extends Component{
 		// 	users: ['test user'],
 		// 	username: 'test user'
 		// })
-		axios.get('http://localhost:5000/users/').then(res => {
+		axios.get(`${baseUrl}/users/`).then(res => {
 			if (res.data.length > 0) {
 				this.setState({
 					users: res.data.map(user => user.username),
@@ -74,7 +76,7 @@ export default class CreateExercises extends Component{
 		}
 		
 		console.log(exercise);
-		axios.post('http://localhost:5000/exercises/add', exercise).then(res => {
+		axios.post(`${baseUrl}/exercises/add/`, exercise).then(res => {
 			console.log(res.data);
 			window.location = '/';
 		});

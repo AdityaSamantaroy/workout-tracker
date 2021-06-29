@@ -1,6 +1,25 @@
 {
+    
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  
+  "author": "Aditya Samantaroy",
+  "scripts": {
+    "start": "cd backend/ && node server.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "cd backend/ && nodemon server.js",
+		"build:ui": "cd backend/ && rm -rf build && cd ../frontend/ && npm run build --prod && cp -r build ../backend/ && cd ../",
+		"deploy": "git push heroku main",
+		"deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+		"logs:prod": "heroku logs --tail",
+		"github:push": "git push origin main"
+  },
+  
   "dependencies": {
     "bootstrap": "^5.0.2",
     "react-router-dom": "^5.2.0"
   }
+  
+  
 }
